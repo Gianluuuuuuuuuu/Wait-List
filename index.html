@@ -1,65 +1,147 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marketor - Il Futuro del Marketing Automation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            background: #1a1a1a;
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-        }
-        h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-            color: #ccc;
-        }
-        input, button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        input {
-            background: #222;
-            color: white;
-        }
-        button {
-            background: #ff9900;
-            color: black;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #ff6600;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketor - Il Futuro del Marketing Automation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      animation: fadeIn 1.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    p.lead {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: #ddd;
+      line-height: 1.5;
+    }
+    .features {
+      text-align: left;
+      margin: 30px 0;
+    }
+    .features h2 {
+      font-size: 32px;
+      color: #ffcc00;
+      margin-bottom: 15px;
+    }
+    .features ul {
+      list-style: none;
+    }
+    .features li {
+      font-size: 20px;
+      margin-bottom: 10px;
+      padding-left: 30px;
+      position: relative;
+    }
+    .features li::before {
+      content: '\\2713';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #ffcc00;
+      font-size: 22px;
+      line-height: 1;
+    }
+    form {
+      margin-top: 30px;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      border: 2px solid #333;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border 0.3s;
+    }
+    input[type="email"]:focus {
+      border-color: #ffcc00;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 20px;
+      background: #ffcc00;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #e6b800;
+      transform: translateY(-3px);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Marketor sta arrivando</h1>
-        <p>Automazioni avanzate, AI-powered marketing e crescita su più canali.<br> Unisciti ora alla lista d'attesa per il lancio.</p>
-        <form action="#" method="POST">
-            <input type="email" name="email" placeholder="Inserisci la tua email" required>
-            <button type="submit">Iscriviti alla Waitlist</button>
-        </form>
+  <div class="container">
+    <h1>Marketor Sta Arrivando</h1>
+    <p class="lead">Entra nel futuro del marketing automation con soluzioni AI-driven, automazioni multicanale e analisi avanzate per trasformare il tuo business.</p>
+    
+    <div class="features">
+      <h2>Perché Scegliere Marketor?</h2>
+      <ul>
+        <li>Automazioni intelligenti per Email, SMS, Social e oltre.</li>
+        <li>Analisi dati e reportistica AI-powered per decisioni rapide.</li>
+        <li>Segmentazione precisa e targeting ottimizzato.</li>
+        <li>Ottimizzazione degli orari e A/B Testing automatico.</li>
+        <li>Interfaccia intuitiva e strumenti esclusivi per massimizzare le conversioni.</li>
+      </ul>
     </div>
+    
+    <p>Iscriviti ora alla nostra waitlist e ottieni accesso esclusivo alle funzionalità più innovative prima del lancio ufficiale.</p>
+    
+    <form action="#" method="POST">
+      <input type="email" name="email" placeholder="Inserisci la tua email" required>
+      <button type="submit">Iscriviti alla Waitlist</button>
+    </form>
+    
+    <footer>
+      &copy; 2025 Marketor. Tutti i diritti riservati.
+    </footer>
+  </div>
 </body>
 </html>
-
