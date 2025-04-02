@@ -17,10 +17,11 @@
     body {
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
-      background: #000;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
       color: #fff;
       position: relative;
       min-height: 100vh;
+      padding: 20px;
     }
     /* Canvas for Three.js background */
     #bgCanvas {
@@ -31,7 +32,7 @@
       height: 100%;
       z-index: 0;
     }
-    /* Container with glassmorphism */
+    /* Glassmorphism container */
     .container {
       position: relative;
       z-index: 2;
@@ -41,9 +42,13 @@
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 60px 40px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
       text-align: center;
       opacity: 0;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     h1 {
       font-size: 56px;
@@ -51,7 +56,8 @@
       text-transform: uppercase;
       letter-spacing: 3px;
       margin-bottom: 20px;
-      text-shadow: 0 0 10px #ffcc00;
+      /* Soft text shadow */
+      text-shadow: 0 0 5px rgba(255,204,0,0.5);
     }
     p.lead {
       font-size: 22px;
@@ -128,12 +134,12 @@
       cursor: pointer;
       font-weight: 600;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+      box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
     }
     button:hover {
       background: #e6b800;
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(255, 204, 0, 0.7);
+      box-shadow: 0 4px 12px rgba(255, 204, 0, 0.5);
     }
     button:active {
       transform: translateY(0);
@@ -194,7 +200,7 @@
   <div class="container">
     <h1>Marketor is Coming</h1>
     <p class="lead">
-      Are you tired of outdated marketing tools that waste your time and money? Marketor transforms marketing automation with AI-driven strategies, precise targeting, and intelligent workflows designed to supercharge your growth.
+      Tired of outdated marketing tools that waste your time and money? Marketor transforms marketing automation with AI-driven strategies, precise targeting, and intelligent workflows designed to supercharge your growth.
     </p>
     
     <div class="section problems">
@@ -257,22 +263,22 @@
       camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
       renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      // Create a glowing torus knot geometry
+      // Create a softer glowing torus knot
       const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
       const material = new THREE.MeshStandardMaterial({
         color: 0xffcc00,
         emissive: 0xffcc00,
-        emissiveIntensity: 0.5,
-        roughness: 0.1,
-        metalness: 0.8
+        emissiveIntensity: 0.2,
+        roughness: 0.4,
+        metalness: 0.6
       });
       mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
       
       // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
       scene.add(ambientLight);
-      const pointLight = new THREE.PointLight(0xffcc00, 1);
+      const pointLight = new THREE.PointLight(0xffcc00, 0.8);
       pointLight.position.set(50, 50, 50);
       scene.add(pointLight);
       
@@ -286,11 +292,11 @@
       renderer.render(scene, camera);
     }
     
-    // GSAP animations for container fadeIn and neon glow on button
+    // GSAP animations for container fadeIn and subtle button glow
     function initAnimations() {
       gsap.to('.container', { duration: 1.5, opacity: 1, y: 0, ease: 'power2.out' });
       gsap.from('h1', { duration: 1.5, opacity: 0, y: -50, ease: 'bounce.out' });
-      gsap.to('button', { boxShadow: "0 0 20px 5px rgba(255,204,0,0.6)", repeat: -1, yoyo: true, ease: "sine.inOut", duration: 1.5 });
+      gsap.to('button', { boxShadow: "0 0 12px 3px rgba(255,204,0,0.4)", repeat: -1, yoyo: true, ease: "sine.inOut", duration: 2 });
     }
     
     window.addEventListener('resize', () => {
@@ -299,7 +305,7 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
     
-    // Inizializzazione
+    // Initialize
     initThreeJS();
     animateThreeJS();
     initAnimations();
