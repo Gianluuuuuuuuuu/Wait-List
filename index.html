@@ -22,11 +22,21 @@
     body {
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
-      background: #000;
+      background: #1d1f22; /* Colore di fallback per evitare lo schermo nero */
       color: #fff;
       position: relative;
       min-height: 100vh;
       padding: 20px;
+    }
+    /* Loader */
+    #loader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #ffcc00;
+      z-index: 3;
     }
     /* Fullscreen Canvas for Three.js background */
     #bgCanvas {
@@ -198,7 +208,11 @@
   </style>
 </head>
 <body>
+  <!-- Loader -->
+  <div id="loader">Loading...</div>
+  <!-- Three.js Background Canvas -->
   <canvas id="bgCanvas"></canvas>
+  
   <div class="container">
     <h1>Marketor is Coming</h1>
     <p class="lead">
@@ -248,6 +262,7 @@
       &copy; 2025 Marketor. All rights reserved.
     </footer>
   </div>
+  
   <script>
     // Function to copy referral link
     function copyReferral() {
@@ -266,7 +281,7 @@
       renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
       
-      // Create a softer torus knot
+      // Create a soft glowing torus knot
       const geometry = new THREE.TorusKnotGeometry(10, 3, 150, 16);
       const material = new THREE.MeshStandardMaterial({
         color: 0xffcc00,
@@ -303,7 +318,7 @@
       composer.render();
     }
     
-    // GSAP animations for fade-in and refined interactions
+    // GSAP animations for container fade-in and refined interactions
     function initAnimations() {
       gsap.to('.container', { duration: 1.8, opacity: 1, y: 0, ease: 'power2.out' });
       gsap.from('h1', { duration: 1.8, opacity: 0, y: -60, ease: 'bounce.out' });
@@ -318,9 +333,13 @@
     });
     
     // Initialization
-    initThreeJS();
-    animateThreeJS();
-    initAnimations();
+    document.addEventListener('DOMContentLoaded', () => {
+      initThreeJS();
+      animateThreeJS();
+      initAnimations();
+      // Remove loader when Three.js is ready
+      document.getElementById('loader').style.display = 'none';
+    });
   </script>
 </body>
 </html>
