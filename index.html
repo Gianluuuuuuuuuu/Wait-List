@@ -12,18 +12,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
   <!-- Three.js Library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Effect Composer for postprocessing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/shaders/CopyShader.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
-      background: linear-gradient(135deg, #000000, #1a1a1a);
+      background: #000;
       color: #fff;
       position: relative;
       min-height: 100vh;
       padding: 20px;
     }
-    /* Canvas for Three.js background */
+    /* Fullscreen Canvas for Three.js background */
     #bgCanvas {
       position: fixed;
       top: 0;
@@ -32,32 +37,31 @@
       height: 100%;
       z-index: 0;
     }
-    /* Glassmorphism container */
+    /* Container with refined glassmorphism */
     .container {
       position: relative;
       z-index: 2;
       max-width: 900px;
-      margin: 50px auto;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
+      margin: 80px auto;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
       border-radius: 20px;
       padding: 60px 40px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
       text-align: center;
       opacity: 0;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
     h1 {
-      font-size: 56px;
+      font-size: 60px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 3px;
       margin-bottom: 20px;
-      /* Soft text shadow */
-      text-shadow: 0 0 5px rgba(255,204,0,0.5);
+      text-shadow: 0 0 6px rgba(255, 204, 0, 0.5);
     }
     p.lead {
       font-size: 22px;
@@ -69,7 +73,7 @@
       text-align: left;
       margin: 40px 0;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 10px;
       transition: transform 0.3s, box-shadow 0.3s;
     }
@@ -78,7 +82,7 @@
       box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
     }
     .section h2 {
-      font-size: 34px;
+      font-size: 36px;
       color: #ffcc00;
       margin-bottom: 15px;
     }
@@ -112,7 +116,7 @@
       width: 100%;
       padding: 18px;
       font-size: 18px;
-      border: 2px solid #333;
+      border: 2px solid #444;
       border-radius: 8px;
       background: rgba(0, 0, 0, 0.5);
       color: #fff;
@@ -134,25 +138,23 @@
       cursor: pointer;
       font-weight: 600;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.4);
     }
     button:hover {
       background: #e6b800;
       transform: translateY(-3px);
       box-shadow: 0 4px 12px rgba(255, 204, 0, 0.5);
     }
-    button:active {
-      transform: translateY(0);
-    }
+    button:active { transform: translateY(0); }
     .referral {
       margin-top: 40px;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 10px;
       text-align: left;
     }
     .referral h2 {
-      font-size: 30px;
+      font-size: 32px;
       color: #ffcc00;
       margin-bottom: 10px;
     }
@@ -247,7 +249,7 @@
     </footer>
   </div>
   <script>
-    // Copy referral link function
+    // Function to copy referral link
     function copyReferral() {
       const referralInput = document.getElementById('referralLink');
       referralInput.select();
@@ -256,56 +258,66 @@
       alert('Referral link copied: ' + referralInput.value);
     }
     
-    // Three.js Background Setup
-    let scene, camera, renderer, mesh;
+    // Three.js Background Setup with Postprocessing for soft effects
+    let scene, camera, renderer, composer, mesh;
     function initThreeJS() {
       scene = new THREE.Scene();
       camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
       renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), antialias: true });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      // Create a softer glowing torus knot
-      const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+      
+      // Create a softer torus knot
+      const geometry = new THREE.TorusKnotGeometry(10, 3, 150, 16);
       const material = new THREE.MeshStandardMaterial({
         color: 0xffcc00,
         emissive: 0xffcc00,
-        emissiveIntensity: 0.2,
-        roughness: 0.4,
-        metalness: 0.6
+        emissiveIntensity: 0.15,
+        roughness: 0.5,
+        metalness: 0.5
       });
       mesh = new THREE.Mesh(geometry, material);
       scene.add(mesh);
       
       // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
       scene.add(ambientLight);
-      const pointLight = new THREE.PointLight(0xffcc00, 0.8);
+      const pointLight = new THREE.PointLight(0xffcc00, 0.7);
       pointLight.position.set(50, 50, 50);
       scene.add(pointLight);
       
       camera.position.z = 40;
+      
+      // Postprocessing (Effect Composer)
+      composer = new THREE.EffectComposer(renderer);
+      const renderPass = new THREE.RenderPass(scene, camera);
+      composer.addPass(renderPass);
+      const copyPass = new THREE.ShaderPass(THREE.CopyShader);
+      copyPass.renderToScreen = true;
+      composer.addPass(copyPass);
     }
     
     function animateThreeJS() {
       requestAnimationFrame(animateThreeJS);
-      mesh.rotation.x += 0.005;
-      mesh.rotation.y += 0.01;
-      renderer.render(scene, camera);
+      mesh.rotation.x += 0.004;
+      mesh.rotation.y += 0.008;
+      composer.render();
     }
     
-    // GSAP animations for container fadeIn and subtle button glow
+    // GSAP animations for fade-in and refined interactions
     function initAnimations() {
-      gsap.to('.container', { duration: 1.5, opacity: 1, y: 0, ease: 'power2.out' });
-      gsap.from('h1', { duration: 1.5, opacity: 0, y: -50, ease: 'bounce.out' });
-      gsap.to('button', { boxShadow: "0 0 12px 3px rgba(255,204,0,0.4)", repeat: -1, yoyo: true, ease: "sine.inOut", duration: 2 });
+      gsap.to('.container', { duration: 1.8, opacity: 1, y: 0, ease: 'power2.out' });
+      gsap.from('h1', { duration: 1.8, opacity: 0, y: -60, ease: 'bounce.out' });
+      gsap.to('button', { boxShadow: "0 0 10px 2px rgba(255,204,0,0.3)", repeat: -1, yoyo: true, ease: "sine.inOut", duration: 2.5 });
     }
     
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth/window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      composer.setSize(window.innerWidth, window.innerHeight);
     });
     
-    // Initialize
+    // Initialization
     initThreeJS();
     animateThreeJS();
     initAnimations();
