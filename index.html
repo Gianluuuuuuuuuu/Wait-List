@@ -11,7 +11,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      background: linear-gradient(135deg, #000000, #1a1a1a);
       color: #fff;
       display: flex;
       justify-content: center;
@@ -24,8 +24,8 @@
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      padding: 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
       text-align: center;
       animation: fadeIn 1.5s ease-out;
     }
@@ -34,61 +34,51 @@
       to { opacity: 1; transform: translateY(0); }
     }
     h1 {
-      font-size: 48px;
+      font-size: 52px;
       font-weight: 700;
       margin-bottom: 20px;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
     p.lead {
       font-size: 22px;
       margin-bottom: 30px;
-      color: #ddd;
+      color: #ccc;
       line-height: 1.5;
     }
-    .problems {
+    .problems, .features, .referral {
       text-align: left;
       margin: 30px 0;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.4);
       border-radius: 10px;
     }
-    .problems h2 {
+    .problems h2, .features h2, .referral h2 {
       font-size: 32px;
       color: #ffcc00;
       margin-bottom: 15px;
     }
-    .problems p {
+    .problems p, .features li, .referral p {
       font-size: 18px;
+      line-height: 1.6;
       margin-bottom: 10px;
-      line-height: 1.5;
-    }
-    .features {
-      text-align: left;
-      margin: 30px 0;
-    }
-    .features h2 {
-      font-size: 32px;
-      color: #ffcc00;
-      margin-bottom: 15px;
     }
     .features ul {
       list-style: none;
-      padding: 0;
+      padding-left: 20px;
     }
     .features li {
-      font-size: 20px;
-      margin-bottom: 10px;
-      padding-left: 30px;
       position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
     }
     .features li::before {
-      content: '\\2713';
+      content: "✓";
       position: absolute;
       left: 0;
       top: 0;
       color: #ffcc00;
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1;
     }
     form {
@@ -96,7 +86,7 @@
     }
     input[type="email"] {
       width: 100%;
-      padding: 15px;
+      padding: 18px;
       font-size: 18px;
       border: 2px solid #333;
       border-radius: 8px;
@@ -105,13 +95,14 @@
       margin-bottom: 20px;
       outline: none;
       transition: border 0.3s;
+      text-align: center;
     }
     input[type="email"]:focus {
       border-color: #ffcc00;
     }
     button {
       width: 100%;
-      padding: 15px;
+      padding: 18px;
       font-size: 20px;
       background: #ffcc00;
       border: none;
@@ -127,23 +118,34 @@
     button:active {
       transform: translateY(0);
     }
-    .referral {
-      margin-top: 40px;
-      padding: 20px;
+    .referral-box {
+      margin-top: 20px;
       background: rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
+      padding: 15px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .referral-box input {
+      width: 80%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 16px;
       text-align: left;
     }
-    .referral h2 {
-      font-size: 28px;
-      color: #ffcc00;
-      margin-bottom: 10px;
+    .referral-box input:focus { outline: none; }
+    .copy-btn {
+      background: #ffcc00;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-    .referral p {
-      font-size: 18px;
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
+    .copy-btn:hover { background: #e6b800; }
     footer {
       margin-top: 40px;
       font-size: 14px;
@@ -155,15 +157,15 @@
   <div class="container">
     <h1>Marketor Sta Arrivando</h1>
     <p class="lead">
-      Sei stanco di soluzioni di marketing inefficaci che ti lasciano senza risposte? Marketor trasforma il modo in cui il tuo business si promuove, offrendo automazioni AI-driven, analisi avanzate e targeting di precisione.
+      Sei stanco di soluzioni di marketing obsolete che sprecano tempo e budget? Marketor rivoluziona il marketing automation con AI-driven strategie, analisi approfondite e automazioni intelligenti per raggiungere il cliente giusto al momento giusto.
     </p>
     
     <div class="problems">
       <h2>I Problemi che Risolviamo</h2>
-      <p><strong>Perdita di tempo:</strong> Le soluzioni tradizionali ti costringono a gestire manualmente le campagne e ad analizzare dati poco affidabili.</p>
-      <p><strong>Costi elevati:</strong> Investimenti ingenti in marketing senza una strategia mirata possono risultare in sprechi di budget.</p>
-      <p><strong>Mancanza di precisione:</strong> La segmentazione generica non permette di raggiungere il cliente giusto al momento giusto.</p>
-      <p><strong>Decisioni poco informate:</strong> Senza dati accurati, le scelte strategiche restano basate su intuizioni, non su analisi concrete.</p>
+      <p><strong>Perdita di tempo:</strong> Le metodologie tradizionali richiedono interventi manuali e analisi superficiali.</p>
+      <p><strong>Spreco di budget:</strong> Investimenti senza risultati concreti e campagne inefficaci.</p>
+      <p><strong>Mancanza di precisione:</strong> Targeting generico che non converte e non premia il cliente ideale.</p>
+      <p><strong>Decisioni errate:</strong> Mancanza di dati accurati per guidare le strategie di marketing.</p>
     </div>
     
     <div class="features">
@@ -173,7 +175,7 @@
         <li>Analisi dati e reportistica AI-powered per decisioni rapide e precise.</li>
         <li>Segmentazione ultra precisa per raggiungere il target ideale.</li>
         <li>Ottimizzazione degli orari e A/B Testing automatico per massimizzare le conversioni.</li>
-        <li>Interfaccia intuitiva e strumenti esclusivi per una gestione efficiente.</li>
+        <li>Interfaccia intuitiva con strumenti esclusivi per una gestione efficiente.</li>
       </ul>
     </div>
     
@@ -188,14 +190,28 @@
     
     <div class="referral">
       <h2>Programma Referral Esclusivo</h2>
-      <p>Condividi il tuo link personale e guadagna benefici esclusivi:</p>
-      <p><strong>Come funziona:</strong> Per ogni persona che si iscrive attraverso il tuo link, riceverai accesso anticipato a funzionalità premium, sconti esclusivi e supporto dedicato.</p>
-      <p>Invita amici, colleghi o partner e diventa parte integrante della rivoluzione Marketor!</p>
+      <p>
+        Condividi il tuo link personale e ottieni benefici esclusivi: accesso anticipato a funzionalità premium, sconti e supporto dedicato.
+      </p>
+      <div class="referral-box">
+        <input type="text" id="referralLink" value="https://marketor.netlify.app/" readonly>
+        <button class="copy-btn" onclick="copyReferral()">Copia il Link</button>
+      </div>
     </div>
     
     <footer>
       &copy; 2025 Marketor. Tutti i diritti riservati.
     </footer>
   </div>
+  <script>
+    function copyReferral() {
+      const referralInput = document.getElementById('referralLink');
+      referralInput.select();
+      referralInput.setSelectionRange(0, 99999); // per dispositivi mobili
+      document.execCommand('copy');
+      alert('Link copiato: ' + referralInput.value);
+    }
+  </script>
 </body>
 </html>
+
