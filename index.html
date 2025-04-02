@@ -1,77 +1,90 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marketor - Il Futuro del Marketing Automation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marketor – The Future of Marketing Automation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    /* Reset & Box Sizing */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #000000, #1a1a1a);
       color: #fff;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
       padding: 20px;
     }
+    
     .container {
       max-width: 900px;
       width: 100%;
       background: rgba(255, 255, 255, 0.05);
       border-radius: 20px;
-      padding: 50px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+      padding: 60px 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
       text-align: center;
       animation: fadeIn 1.5s ease-out;
     }
+    
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    
     h1 {
-      font-size: 52px;
+      font-size: 56px;
       font-weight: 700;
-      margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 3px;
+      margin-bottom: 20px;
     }
+    
     p.lead {
       font-size: 22px;
       margin-bottom: 30px;
-      color: #ccc;
       line-height: 1.5;
+      color: #ccc;
     }
-    .problems, .features, .referral {
+    
+    .section {
       text-align: left;
-      margin: 30px 0;
+      margin: 40px 0;
       padding: 20px;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.45);
       border-radius: 10px;
     }
-    .problems h2, .features h2, .referral h2 {
-      font-size: 32px;
+    
+    .section h2 {
+      font-size: 34px;
       color: #ffcc00;
       margin-bottom: 15px;
     }
-    .problems p, .features li, .referral p {
+    
+    .section p {
       font-size: 18px;
-      line-height: 1.6;
       margin-bottom: 10px;
+      line-height: 1.6;
     }
+    
     .features ul {
       list-style: none;
-      padding-left: 20px;
+      padding-left: 30px;
     }
+    
     .features li {
       position: relative;
-      padding-left: 35px;
+      font-size: 20px;
       margin-bottom: 12px;
+      padding-left: 40px;
     }
+    
     .features li::before {
       content: "✓";
       position: absolute;
@@ -79,11 +92,12 @@
       top: 0;
       color: #ffcc00;
       font-size: 24px;
-      line-height: 1;
     }
+    
     form {
       margin-top: 30px;
     }
+    
     input[type="email"] {
       width: 100%;
       padding: 18px;
@@ -93,13 +107,15 @@
       background: rgba(0, 0, 0, 0.5);
       color: #fff;
       margin-bottom: 20px;
-      outline: none;
-      transition: border 0.3s;
       text-align: center;
+      transition: border 0.3s;
     }
+    
     input[type="email"]:focus {
       border-color: #ffcc00;
+      outline: none;
     }
+    
     button {
       width: 100%;
       padding: 18px;
@@ -108,34 +124,61 @@
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
       font-weight: 600;
+      transition: background 0.3s, transform 0.3s;
     }
+    
     button:hover {
       background: #e6b800;
       transform: translateY(-3px);
     }
+    
     button:active {
       transform: translateY(0);
     }
+    
+    .referral {
+      margin-top: 40px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 10px;
+      text-align: left;
+    }
+    
+    .referral h2 {
+      font-size: 30px;
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+    
+    .referral p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    
     .referral-box {
-      margin-top: 20px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 15px;
-      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 15px;
+      border-radius: 8px;
     }
+    
     .referral-box input {
       width: 80%;
       background: transparent;
       border: none;
       color: #fff;
       font-size: 16px;
-      text-align: left;
+      padding: 5px;
     }
-    .referral-box input:focus { outline: none; }
+    
+    .referral-box input:focus {
+      outline: none;
+    }
+    
     .copy-btn {
       background: #ffcc00;
       border: none;
@@ -145,9 +188,13 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-    .copy-btn:hover { background: #e6b800; }
+    
+    .copy-btn:hover {
+      background: #e6b800;
+    }
+    
     footer {
-      margin-top: 40px;
+      margin-top: 50px;
       font-size: 14px;
       color: #777;
     }
@@ -155,63 +202,62 @@
 </head>
 <body>
   <div class="container">
-    <h1>Marketor Sta Arrivando</h1>
+    <h1>Marketor is Coming</h1>
     <p class="lead">
-      Sei stanco di soluzioni di marketing obsolete che sprecano tempo e budget? Marketor rivoluziona il marketing automation con AI-driven strategie, analisi approfondite e automazioni intelligenti per raggiungere il cliente giusto al momento giusto.
+      Tired of outdated marketing tools that waste your time and money? Marketor revolutionizes marketing automation with AI-powered strategies, precise targeting, and intelligent workflows designed to drive growth.
     </p>
     
-    <div class="problems">
-      <h2>I Problemi che Risolviamo</h2>
-      <p><strong>Perdita di tempo:</strong> Le metodologie tradizionali richiedono interventi manuali e analisi superficiali.</p>
-      <p><strong>Spreco di budget:</strong> Investimenti senza risultati concreti e campagne inefficaci.</p>
-      <p><strong>Mancanza di precisione:</strong> Targeting generico che non converte e non premia il cliente ideale.</p>
-      <p><strong>Decisioni errate:</strong> Mancanza di dati accurati per guidare le strategie di marketing.</p>
+    <div class="section problems">
+      <h2>The Problems We Solve</h2>
+      <p><strong>Time Wasted:</strong> Manual campaign management and superficial analytics drain your resources.</p>
+      <p><strong>Budget Drain:</strong> Ineffective strategies lead to overspending with little return.</p>
+      <p><strong>Generic Targeting:</strong> Broad segmentation fails to connect with your ideal customers.</p>
+      <p><strong>Poor Decision-Making:</strong> Lack of reliable data leads to misguided strategies.</p>
     </div>
     
-    <div class="features">
-      <h2>Perché Scegliere Marketor?</h2>
+    <div class="section features">
+      <h2>Why Choose Marketor?</h2>
       <ul>
-        <li>Automazioni intelligenti per Email, SMS, Social e oltre.</li>
-        <li>Analisi dati e reportistica AI-powered per decisioni rapide e precise.</li>
-        <li>Segmentazione ultra precisa per raggiungere il target ideale.</li>
-        <li>Ottimizzazione degli orari e A/B Testing automatico per massimizzare le conversioni.</li>
-        <li>Interfaccia intuitiva con strumenti esclusivi per una gestione efficiente.</li>
+        <li>Intelligent automation for Email, SMS, Social, and more.</li>
+        <li>AI-powered analytics for fast, precise decisions.</li>
+        <li>Ultra-precise segmentation to reach your ideal audience.</li>
+        <li>Optimal scheduling and automated A/B testing to maximize conversions.</li>
+        <li>A sleek, intuitive interface with exclusive tools for efficient management.</li>
       </ul>
     </div>
     
     <p>
-      Iscriviti ora alla waitlist per ottenere accesso esclusivo alle funzionalità più innovative prima del lancio ufficiale.
+      Join our waitlist now for exclusive early access to the most innovative marketing automation platform.
     </p>
     
     <form action="#" method="POST">
-      <input type="email" name="email" placeholder="Inserisci la tua email" required>
-      <button type="submit">Iscriviti alla Waitlist</button>
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <button type="submit">Join the Waitlist</button>
     </form>
     
     <div class="referral">
-      <h2>Programma Referral Esclusivo</h2>
+      <h2>Exclusive Referral Program</h2>
       <p>
-        Condividi il tuo link personale e ottieni benefici esclusivi: accesso anticipato a funzionalità premium, sconti e supporto dedicato.
+        Share your unique referral link and earn exclusive benefits: early access to premium features, special discounts, and dedicated support.
       </p>
       <div class="referral-box">
         <input type="text" id="referralLink" value="https://marketor.netlify.app/" readonly>
-        <button class="copy-btn" onclick="copyReferral()">Copia il Link</button>
+        <button class="copy-btn" onclick="copyReferral()">Copy Link</button>
       </div>
     </div>
     
     <footer>
-      &copy; 2025 Marketor. Tutti i diritti riservati.
+      &copy; 2025 Marketor. All rights reserved.
     </footer>
   </div>
   <script>
     function copyReferral() {
       const referralInput = document.getElementById('referralLink');
       referralInput.select();
-      referralInput.setSelectionRange(0, 99999); // per dispositivi mobili
+      referralInput.setSelectionRange(0, 99999);
       document.execCommand('copy');
-      alert('Link copiato: ' + referralInput.value);
+      alert('Referral link copied: ' + referralInput.value);
     }
   </script>
 </body>
 </html>
-
