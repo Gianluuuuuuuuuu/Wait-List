@@ -193,23 +193,7 @@
       font-size: 14px;
       color: #777;
     }
-  <style>
-    .floating-message {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  font-size: 16px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 1000;
-}
-</style>
+  </style>
 </head>
 <body>
   <canvas id="bgCanvas"></canvas>
@@ -325,21 +309,6 @@
     initThreeJS();
     animateThreeJS();
     initAnimations();
-  <script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-  event.preventDefault(); // Evita il refresh della pagina
-  document.getElementById("successMessage").style.opacity = "1";
-  document.getElementById("successMessage").style.transform = "translateY(0)";
-  
-  // Nasconde il messaggio dopo 3 secondi
-  setTimeout(() => {
-    document.getElementById("successMessage").style.opacity = "0";
-    document.getElementById("successMessage").style.transform = "translateY(20px)";
-  }, 3000);
-});
   </script>
-  <div class="floating-message" id="successMessage">
-  ✅ Successfully joined the waitlist!
-</div>
 </body>
 </html>
