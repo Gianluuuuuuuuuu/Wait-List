@@ -14,18 +14,21 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
-      background: #000;
+      background: linear-gradient(135deg, #000000, #1a1a1a);
       color: #fff;
-      overflow: hidden;
-      position: relative;
+      /* Consentiamo lo scrolling verticale */
+      overflow-x: hidden;
+      /* Rimuoviamo l'overflow hidden per il body */
       min-height: 100vh;
+      padding: 20px;
+      position: relative;
     }
     /* Particle background */
     #particles-js {
-      position: absolute;
+      position: fixed;
       width: 100%;
       height: 100%;
-      z-index: 1;
+      z-index: 0;
       top: 0;
       left: 0;
     }
@@ -34,7 +37,7 @@
       position: relative;
       z-index: 2;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 50px auto;  /* Aggiunto margin top e bottom per lo scrolling */
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
       border-radius: 20px;
